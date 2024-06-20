@@ -1,5 +1,4 @@
 # Los serializer convierten los tipos de datos de django a json
-
 from rest_framework import serializers
 from .models import Usuario, Ficha, ContactoEmergencia
 
