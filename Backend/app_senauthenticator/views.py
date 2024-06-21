@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.contrib.auth.models import User
+from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework import status
 from django.shortcuts import get_object_or_404
@@ -67,17 +67,51 @@ def login(request):
 #         token=Token.objects.create(user=user)
 #         return Response({'token':token.key,"user":serializer.data},status=status.HTTP_201_CREATED)
         # return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-
+        
 @api_view(['POST'])
 def register(request):
     serializer = UsuarioSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
-        user = serializer.data
-        user.set_password(serializer.data['password'])
-        token = Token.objects.create(user=user)
-        return Response({'token': token.key, 'user': user}, status=status.HTTP_201_CREATED)
+        user = serializer.save()
+        user.set_password(request.data['password'])  
+        user.save()  
+
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+###Viejo Funcion Register
+
+# @api_view(['POST'])
+# def register(request):
+#     serializer = UsuarioSerializer(data=request.data)
+#     if serializer.is_valid():
+#         serializer.save()
+#         user = serializer.data
+#         user.set_password(serializer.data['password'])
+#         user.save()
+#         token = Token.objects.create(user=user)
+#         return Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_201_CREATED)
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+###Julieth register
+# @api_view(['POST'])
+# def register(request):
+#     print(request.data)
+    
+#     serializer = UserSerializer(data= request.data)
+    
+    
+#     if serializer.is_valid():
+#         serializer.save()
+        
+#         user= User.objects.get(username= serializer.data["username"])
+#         user.set_password(serializer.data['password'])
+#         user.save()
+#         token = Token.objects.create(user= user)
+#         return Response ({'token': token.key, "user": serializer.data}, status=status.HTTP_201_CREATED)
+    
+#     return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
         
     
     

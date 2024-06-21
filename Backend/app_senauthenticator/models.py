@@ -64,6 +64,8 @@ class Usuario(models.Model):
     registro_facial_usuario=models.ForeignKey(RegistroFacial, on_delete=models.PROTECT, null=True)
     contacto_emergencia_usuario=models.ForeignKey(ContactoEmergencia, on_delete=models.PROTECT, null=True)
     ficha_usuario=models.ForeignKey(Ficha,on_delete=models.PROTECT, null=True)
+    password=models.CharField(max_length=50)
+    
     
 
 class Objeto(models.Model):
