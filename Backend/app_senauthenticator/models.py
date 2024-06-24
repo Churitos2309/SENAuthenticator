@@ -67,7 +67,7 @@ class Usuario(models.Model):
     correo_institucional_usuario=models.CharField(max_length=50) 
     correo_personal_usuario=models.CharField(max_length=50) 
     tipo_documento_usuario=models.CharField(max_length=50, choices=tipo_documento_usuario, default='')
-    numero_documento_usuario=models.CharField(max_length=20, unique=True, default='')
+    numero_documento_usuario=models.CharField(max_length=20, unique=True,)
     contrasenia_usuario=models.CharField(max_length=30)
     rol_usuario = models.CharField(max_length=13, choices=tipo_rol) 
     registro_facial_usuario=models.ForeignKey(RegistroFacial, on_delete=models.PROTECT, null=True)
