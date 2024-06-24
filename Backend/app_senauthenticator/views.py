@@ -73,7 +73,7 @@ def register(request):
     serializer = UsuarioSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save()
-        user.set_password(request.data['password'])  
+        user.set_password(request.data['contrasenia_usuario'])  
         user.save()  
 
         token, created = Token.objects.get_or_create(user=user)
