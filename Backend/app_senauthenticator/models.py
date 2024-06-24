@@ -67,12 +67,11 @@ class Usuario(models.Model):
     genero_usuario=models.CharField(max_length=20, choices=genero)  
     correo_institucional_usuario=models.CharField(max_length=50) 
     correo_personal_usuario=models.CharField(max_length=50) 
-    tipo_documento_usuario=models.CharField(max_length=50, choices=tipo_documento_usuario, default='')
-    numero_documento_usuario=models.CharField(max_length=20, unique=True, default='')
+    # tipo_documento_usuario=models.CharField(max_length=50, choices=tipo_documento_usuario, default='')
+    # numero_documento_usuario=models.CharField(max_length=20, default='')
     contrasenia_usuario=models.CharField(max_length=30)
-    rol_usuario = models.CharField(max_length=13, choices=tipo_rol) 
-    registro_facial_usuario=models.ForeignKey(RegistroFacial, on_delete=models.PROTECT, null=True)
-    ficha_usuario=models.ForeignKey(Ficha,on_delete=models.PROTECT, null=True)
+    # registro_facial_usuario=models.ForeignKey(RegistroFacial, on_delete=models.PROTECT, null=True, )
+    # ficha_usuario=models.ForeignKey(Ficha,on_delete=models.PROTECT, null=True)
 
     def __str__(self) -> str:
         return f'{self.nombre_usuario} {self.apellidos_usuario}'

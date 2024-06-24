@@ -19,8 +19,9 @@ from rest_framework import status
 
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import authentication_classes
-from rest_framework. permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.decorators import permission_classes
 
 # Controlador de los programas de formación
 class RegistroFacialListarCrear(generics.ListCreateAPIView): # la vista generica ListCreateAPIView maneja las solicitudes listar y crear (GET, POST)
@@ -68,8 +69,7 @@ class FichaDetalles(generics.RetrieveUpdateDestroyAPIView):
 class UsuarioListarCrear(generics.ListCreateAPIView):
     queryset = Usuario.objects.all()    
     serializer_class = UsuarioSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    
 
 class UsuarioDetalles(generics.RetrieveUpdateDestroyAPIView):
     queryset = Usuario.objects.all()
@@ -82,8 +82,7 @@ class UsuarioDetalles(generics.RetrieveUpdateDestroyAPIView):
 class ObjetoListarCrear(generics.ListCreateAPIView):
     queryset = Objeto.objects.all()
     serializer_class = ObjetoSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    
 
 class ObjetoDetalles(generics.RetrieveUpdateDestroyAPIView):
     queryset = Objeto.objects.all()
@@ -145,11 +144,11 @@ def register(request):
     if serializer.is_valid():
         serializer.save()
         
-        user= UsuarioSerializer.objects.get(nombre_usuario= serializer.data["username"])
-        user.set_password(serializer.data['contrasenia_usuario'])
+        user= serializer.objects.get(nombre_usuario= serializer.data["nombre_usuario"])
+        # user.set_password(serializer.data['contrasenia_usuario'])
         user.save()
-        token = Token.objects.create(nombre_usuarior= user)
-        return Response ({'token': token.key, "user": serializer.data}, status=status.HTTP_201_CREATED)
+        
+        return Response ({"Bienvenido <3"}, status=status.HTTP_201_CREATED)
     
     return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
 
