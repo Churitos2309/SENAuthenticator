@@ -32,11 +32,20 @@ class FichaSerializer(serializers.ModelSerializer):
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = ('nombre_usuario', 'apellidos_usuario', 'genero_usuario', 
+        fields = ['nombre_usuario', 'apellidos_usuario', 'genero_usuario', 
                  'correo_institucional_usuario', 'correo_personal_usuario', 
                  'tipo_documento_usuario', 'numero_documento_usuario','contrasenia_usuario',
-                 'rol_usuario', 'registro_facial_usuario', 
-                 'ficha_usuario')
+                 'rol_usuario', 
+                #  "ficha_usuario"
+                 ]
+        # extra_kwargs = {
+        #     'ficha_usuario': {required: False}
+        # }
+
+    # def validate_numero_documento_usuario(self, value):
+    #     if Usuario.objects.filter(numero_documento_usuario=value).exists():
+    #         raise serializers.ValidationError("El número de documento ya está registrado.")
+    #     return value
 
 
 # Serializer de los Objetos que registran los Usuarios

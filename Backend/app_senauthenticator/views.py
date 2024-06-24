@@ -9,6 +9,112 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import authenticate
 #Importaciones de Tokens
+from django.db import transaction
+from rest_framework import generics
+
+# se importan los modelos 
+from .models import RegistroFacial, Programa, Ficha, Usuario, Objeto, ContactoEmergencia, Ingreso
+# se importan los serializers
+from .serializer import RegistroFacialSerializer, ProgramaSerializer, FichaSerializer, UsuarioSerializer, ObjetoSerializer, ContactoEmergenciaSerializer, IngresoSerializer
+
+
+# Controlador de los programas de formación
+class RegistroFacialListarCrear(generics.ListCreateAPIView): # la vista generica ListCreateAPIView maneja las solicitudes listar y crear (GET, POST)
+    queryset = RegistroFacial.objects.all() # se obtienen todos los objetos del modelo
+    serializer_class = RegistroFacialSerializer# se utiliza el serializer para convertir los objetos a JSON
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
+class RegistroFacialDetalles(generics.RetrieveUpdateDestroyAPIView): # la vista generica RetrieveUpdateDestroyAPIView maneja las solicitudes para recuperar por pk, actualizar y eliminar (GET, PUT Y DELETE)
+    queryset = RegistroFacial.objects.all()
+    serializer_class = RegistroFacialSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+# Controlador de los programas de formación
+class ProgramaListarCrear(generics.ListCreateAPIView):
+    queryset = Programa.objects.all()
+    serializer_class = ProgramaSerializer
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+
+class ProgramaDetalles(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Programa.objects.all()
+    serializer_class = ProgramaSerializer
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+
+
+# Controlador de las Fichas de los programas de formación
+class FichaListarCrear(generics.ListCreateAPIView):
+    queryset = Ficha.objects.all()
+    serializer_class = FichaSerializer
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+
+class FichaDetalles(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Ficha.objects.all()    
+    serializer_class = FichaSerializer
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+
+
+# Controlador de los Usuarios
+class UsuarioListarCrear(generics.ListCreateAPIView):
+    queryset = Usuario.objects.all()    
+    serializer_class = UsuarioSerializer
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+
+class UsuarioDetalles(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
+
+
+# Controlador de los Objetos que registran los Usuarios    
+class ObjetoListarCrear(generics.ListCreateAPIView):
+    queryset = Objeto.objects.all()
+    serializer_class = ObjetoSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+class ObjetoDetalles(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Objeto.objects.all()
+    serializer_class = ObjetoSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
+# Controlador de los contactos de emergencia que tienen los Usuarios
+class ContactoEmergenciaListarCrear(generics.ListCreateAPIView):
+    queryset = ContactoEmergencia.objects.all()
+    serializer_class = ContactoEmergenciaSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+
+class ContactoEmergenciaDetalles(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ContactoEmergencia.objects.all()
+    serializer_class = ContactoEmergenciaSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
+# Controlador de los Ingresos de los usuarios al centro de formación
+class IngresoListarCrear(generics.ListCreateAPIView):
+    queryset = Ingreso.objects.all()
+    serializer_class = IngresoSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+class IngresoDetalles(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Ingreso.objects.all()
+    serializer_class = IngresoSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
 #Funciones Para authentificacion y proteccion de datos atravez de tokens
@@ -68,18 +174,76 @@ def login(request):
 #         return Response({'token':token.key,"user":serializer.data},status=status.HTTP_201_CREATED)
         # return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
         
+import sys
+sys.setrecursionlimit(2000)
+import logging
+
+logger = logging.getLogger(__name__)
+
+# @api_view(['POST'])
+# def register(request):
+#     logger.info("Starting registration process.")
+#     serializer = UsuarioSerializer(data=request.data)
+#     if serializer.is_valid():
+#         try:
+#             with transaction.atomic():
+#                 user = serializer.save()
+#                 user.set_password(request.data['contrasenia_usuario'])
+#                 user.save()
+
+#                 token, created = Token.objects.get_or_create(user=user)
+#                 logger.info("User registered successfully.")
+#                 return Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_201_CREATED)
+#         except Exception as e:
+#             logger.error(f"Error during registration: {e}")
+#             return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+#     logger.error(f"Validation errors: {serializer.errors}")
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @api_view(['POST'])
 def register(request):
-    serializer = UsuarioSerializer(data=request.data)
-    if serializer.is_valid():
-        user = serializer.save()
-        user.set_password(request.data['contrasenia_usuario'])
-        user.save()  # Save the user object to MongoDB
+    try:
+        logger.info("Iniciando el proceso de registro.")
+        serializer = UsuarioSerializer(data=request.data)
+        if serializer.is_valid():
+            # serializer.data.set_password(request.data['contrasenia_usuario'])
+            serializer.save()
+            # token, created = Token.objects.get_or_create(user=serializer.data)
+            logger.info("Usuario registrado exitosamente.")
+            return Response({'mensaje': 'Usuario registrado exitosamente'}, status=status.HTTP_201_CREATED)
+            # return Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_201_CREATED)    
+        else:
+            logger.error(f"Errores de validación: {serializer.errors}")
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        token, created = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#'rest_framework.authtoken',
+    except Exception as e:
+        logger.error(f"Error durante el registro:", e)
+        return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+# @api_view(['POST'])
+# def register(request):
+#     logger.info("Iniciando el proceso de registro.")
+#     serializer = UsuarioSerializer(data=request.data)
+#     if serializer.is_valid():
+#         try:
+            
+#             numero_documento = request.data['numero_documento_usuario']
+#             user_exists = Usuario.objects.filter(numero_documento_usuario=numero_documento).exists()
+#             if user_exists:
+#                 return Response({'detail': 'El número de documento ya está registrado.'}, status=status.HTTP_400_BAD_REQUEST)
+
+#             user = serializer.save()
+#             user.set_password(request.data['contrasenia_usuario'])
+#             user.save()
+
+#             token, created = Token.objects.get_or_create(user=user)
+#             logger.info("Usuario registrado exitosamente.")
+#             return Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_201_CREATED)
+#         except Exception as e:
+#             logger.error(f"Error durante el registro: {e}")
+#             return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+#     logger.error(f"Errores de validación: {serializer.errors}")
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 ###Viejo Funcion Register
 
@@ -135,108 +299,3 @@ def profile (request):
 
 # Apis del proyecto, para enviar y recibir información de manera eficiente
 
-from rest_framework import generics
-
-# se importan los modelos 
-from .models import RegistroFacial, Programa, Ficha, Usuario, Objeto, ContactoEmergencia, Ingreso
-# se importan los serializers
-from .serializer import RegistroFacialSerializer, ProgramaSerializer, FichaSerializer, UsuarioSerializer, ObjetoSerializer, ContactoEmergenciaSerializer, IngresoSerializer
-
-
-# Controlador de los programas de formación
-class RegistroFacialListarCrear(generics.ListCreateAPIView): # la vista generica ListCreateAPIView maneja las solicitudes listar y crear (GET, POST)
-    queryset = RegistroFacial.objects.all() # se obtienen todos los objetos del modelo
-    serializer_class = RegistroFacialSerializer# se utiliza el serializer para convertir los objetos a JSON
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-
-class RegistroFacialDetalles(generics.RetrieveUpdateDestroyAPIView): # la vista generica RetrieveUpdateDestroyAPIView maneja las solicitudes para recuperar por pk, actualizar y eliminar (GET, PUT Y DELETE)
-    queryset = RegistroFacial.objects.all()
-    serializer_class = RegistroFacialSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-# Controlador de los programas de formación
-class ProgramaListarCrear(generics.ListCreateAPIView):
-    queryset = Programa.objects.all()
-    serializer_class = ProgramaSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-class ProgramaDetalles(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Programa.objects.all()
-    serializer_class = ProgramaSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-
-# Controlador de las Fichas de los programas de formación
-class FichaListarCrear(generics.ListCreateAPIView):
-    queryset = Ficha.objects.all()
-    serializer_class = FichaSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-class FichaDetalles(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Ficha.objects.all()    
-    serializer_class = FichaSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-
-# Controlador de los Usuarios
-class UsuarioListarCrear(generics.ListCreateAPIView):
-    queryset = Usuario.objects.all()    
-    serializer_class = UsuarioSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-class UsuarioDetalles(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Usuario.objects.all()
-    serializer_class = UsuarioSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-
-# Controlador de los Objetos que registran los Usuarios    
-class ObjetoListarCrear(generics.ListCreateAPIView):
-    queryset = Objeto.objects.all()
-    serializer_class = ObjetoSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-class ObjetoDetalles(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Objeto.objects.all()
-    serializer_class = ObjetoSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-
-# Controlador de los contactos de emergencia que tienen los Usuarios
-class ContactoEmergenciaListarCrear(generics.ListCreateAPIView):
-    queryset = ContactoEmergencia.objects.all()
-    serializer_class = ContactoEmergenciaSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-    
-
-class ContactoEmergenciaDetalles(generics.RetrieveUpdateDestroyAPIView):
-    queryset = ContactoEmergencia.objects.all()
-    serializer_class = ContactoEmergenciaSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-
-# Controlador de los Ingresos de los usuarios al centro de formación
-class IngresoListarCrear(generics.ListCreateAPIView):
-    queryset = Ingreso.objects.all()
-    serializer_class = IngresoSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-class IngresoDetalles(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Ingreso.objects.all()
-    serializer_class = IngresoSerializer
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]

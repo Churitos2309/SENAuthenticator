@@ -36,9 +36,7 @@ genero = [
 ]
     
 
-class RegistroFacial(models.Model):
-    datos_biometricos_registro=models.ImageField(upload_to=f'datos_biometricos_registro')
-    fecha_hora_registro=models.DateTimeField(auto_now_add=True)    
+    
     
 
 class Programa(models.Model):
@@ -65,17 +63,22 @@ class Usuario(models.Model):
     apellidos_usuario=models.CharField(max_length=50)
     genero_usuario=models.CharField(max_length=20, choices=genero)  
     correo_institucional_usuario=models.CharField(max_length=50) 
-    correo_personal_usuario=models.CharField(max_length=50) 
+    correo_personal_usuario=models.CharField(max_length=50)
     tipo_documento_usuario=models.CharField(max_length=50, choices=tipo_documento_usuario, default='')
-    numero_documento_usuario=models.CharField(max_length=20, unique=True,)
+    numero_documento_usuario=models.CharField(max_length=20)
     contrasenia_usuario=models.CharField(max_length=30)
     rol_usuario = models.CharField(max_length=13, choices=tipo_rol) 
-    registro_facial_usuario=models.ForeignKey(RegistroFacial, on_delete=models.PROTECT, null=True)
-    ficha_usuario=models.ForeignKey(Ficha,on_delete=models.PROTECT, null=True)
+    # registro_facial_usuario=models.ForeignKey(RegistroFacial, on_delete=models.PROTECT, null=True, db_column="registro_facial_usuario")
+    # ficha_usuario=models.ForeignKey(Ficha,on_delete=models.PROTECT, null=True, db_column="ficha_usuario")
+    # objects = models.DjongoManager()
 
     def __str__(self) -> str:
         return f'{self.nombre_usuario} {self.apellidos_usuario}'
 
+class RegistroFacial(models.Model):
+    usuario_registro_facial=models.ForeignKey(Usuario, on_delete=models.PROTECT, null=True, db_column="usuario_registro_facial")
+    datos_biometricos_registro=models.ImageField(upload_to=f'datos_biometricos_registro')
+    fecha_hora_registro=models.DateTimeField(auto_now_add=True)
 
 class Objeto(models.Model):
     marca_objeto=models.CharField(max_length=20)
