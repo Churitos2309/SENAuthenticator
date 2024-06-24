@@ -35,7 +35,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
         fields = ('nombre_usuario', 'apellidos_usuario', 'genero_usuario', 
                  'correo_institucional_usuario', 'correo_personal_usuario', 
                  'tipo_documento_usuario', 'numero_documento_usuario',
-                 'rol_usuario', 'registro_facial_usuario', 'contacto_emergencia_usuario',
+                 'rol_usuario', 'registro_facial_usuario', 
                  'ficha_usuario')
 
 

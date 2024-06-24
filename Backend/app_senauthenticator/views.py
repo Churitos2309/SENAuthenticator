@@ -73,8 +73,8 @@ def register(request):
     serializer = UsuarioSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save()
-        user.set_password(request.data['contrasenia_usuario'])  
-        user.save()  
+        user.set_password(request.data['contrasenia_usuario'])
+        user.save()  # Save the user object to MongoDB
 
         token, created = Token.objects.get_or_create(user=user)
         return Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_201_CREATED)
