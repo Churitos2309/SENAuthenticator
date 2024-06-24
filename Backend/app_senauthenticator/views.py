@@ -142,72 +142,100 @@ from .models import RegistroFacial, Programa, Ficha, Usuario, Objeto, ContactoEm
 from .serializer import RegistroFacialSerializer, ProgramaSerializer, FichaSerializer, UsuarioSerializer, ObjetoSerializer, ContactoEmergenciaSerializer, IngresoSerializer
 
 
-# api de los programas de formación
+# Controlador de los programas de formación
 class RegistroFacialListarCrear(generics.ListCreateAPIView): # la vista generica ListCreateAPIView maneja las solicitudes listar y crear (GET, POST)
     queryset = RegistroFacial.objects.all() # se obtienen todos los objetos del modelo
-    serializer_class = RegistroFacialSerializer # se utiliza el serializer para convertir los objetos a JSON
+    serializer_class = RegistroFacialSerializer# se utiliza el serializer para convertir los objetos a JSON
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
 
 class RegistroFacialDetalles(generics.RetrieveUpdateDestroyAPIView): # la vista generica RetrieveUpdateDestroyAPIView maneja las solicitudes para recuperar por pk, actualizar y eliminar (GET, PUT Y DELETE)
     queryset = RegistroFacial.objects.all()
     serializer_class = RegistroFacialSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
-
-# api de los programas de formación
+# Controlador de los programas de formación
 class ProgramaListarCrear(generics.ListCreateAPIView):
     queryset = Programa.objects.all()
     serializer_class = ProgramaSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 class ProgramaDetalles(generics.RetrieveUpdateDestroyAPIView):
     queryset = Programa.objects.all()
     serializer_class = ProgramaSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
-# api de las Fichas de los programas de formación
+# Controlador de las Fichas de los programas de formación
 class FichaListarCrear(generics.ListCreateAPIView):
     queryset = Ficha.objects.all()
     serializer_class = FichaSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 class FichaDetalles(generics.RetrieveUpdateDestroyAPIView):
     queryset = Ficha.objects.all()    
     serializer_class = FichaSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
-# api de los Usuarios
+# Controlador de los Usuarios
 class UsuarioListarCrear(generics.ListCreateAPIView):
     queryset = Usuario.objects.all()    
     serializer_class = UsuarioSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 class UsuarioDetalles(generics.RetrieveUpdateDestroyAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
-# api de los Objetos que registran los Usuarios    
+# Controlador de los Objetos que registran los Usuarios    
 class ObjetoListarCrear(generics.ListCreateAPIView):
     queryset = Objeto.objects.all()
     serializer_class = ObjetoSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 class ObjetoDetalles(generics.RetrieveUpdateDestroyAPIView):
     queryset = Objeto.objects.all()
     serializer_class = ObjetoSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
-# api de los contactos de emergencia que tienen los Usuarios
+# Controlador de los contactos de emergencia que tienen los Usuarios
 class ContactoEmergenciaListarCrear(generics.ListCreateAPIView):
     queryset = ContactoEmergencia.objects.all()
     serializer_class = ContactoEmergenciaSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
 
 class ContactoEmergenciaDetalles(generics.RetrieveUpdateDestroyAPIView):
     queryset = ContactoEmergencia.objects.all()
     serializer_class = ContactoEmergenciaSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
-# api de los Ingresos de los usuarios al centro de formación
+# Controlador de los Ingresos de los usuarios al centro de formación
 class IngresoListarCrear(generics.ListCreateAPIView):
     queryset = Ingreso.objects.all()
     serializer_class = IngresoSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 class IngresoDetalles(generics.RetrieveUpdateDestroyAPIView):
     queryset = Ingreso.objects.all()
     serializer_class = IngresoSerializer
-    
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
