@@ -134,12 +134,12 @@ class IngresoDetalles(generics.RetrieveUpdateDestroyAPIView):
 def login(request):
     tipo_documento = request.data.get('tipo_documento_usuario')
     numero_documento = request.data.get('numero_documento_usuario')
-    password = request.data.get('password')
+    contrasenia_usuario = request.data.get('contrasenia_usuario')
 
-    if not tipo_documento or not numero_documento or not password:
+    if not tipo_documento or not numero_documento or not contrasenia_usuario:
         return Response({'error': 'Tipo de documento, número de documento y contraseña son requeridos'}, status=status.HTTP_400_BAD_REQUEST)
 
-    user = authenticate(tipo_documento=tipo_documento, numero_documento=numero_documento, password=password)
+    user = authenticate(tipo_documento=tipo_documento, numero_documento=numero_documento, password=contrasenia_usuario)
 
     if not user:
         return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_400_BAD_REQUEST)
