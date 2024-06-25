@@ -69,16 +69,16 @@ class Usuario(models.Model):
     contrasenia_usuario=models.CharField(max_length=30)
     rol_usuario = models.CharField(max_length=13, choices=tipo_rol) 
     # registro_facial_usuario=models.ForeignKey(RegistroFacial, on_delete=models.PROTECT, null=True, db_column="registro_facial_usuario")
-    # ficha_usuario=models.ForeignKey(Ficha,on_delete=models.PROTECT, null=True, db_column="ficha_usuario")
+    ficha_usuario=models.ForeignKey(Ficha,on_delete=models.PROTECT, null=True, db_column="ficha_usuario")
     # objects = models.DjongoManager()
 
     def __str__(self) -> str:
         return f'{self.nombre_usuario} {self.apellidos_usuario}'
 
 class RegistroFacial(models.Model):
-    usuario_registro_facial=models.ForeignKey(Usuario, on_delete=models.PROTECT, null=True, db_column="usuario_registro_facial")
     datos_biometricos_registro=models.ImageField(upload_to=f'datos_biometricos_registro')
     fecha_hora_registro=models.DateTimeField(auto_now_add=True)
+    usuario_registro_facial=models.ForeignKey(Usuario, on_delete=models.PROTECT, null=True, db_column="usuario_registro_facial")
 
 class Objeto(models.Model):
     marca_objeto=models.CharField(max_length=20)

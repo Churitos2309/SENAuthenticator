@@ -80,26 +80,26 @@ WSGI_APPLICATION = 'proyecto_senauthenticator.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',
-#         'NAME': 'db_senauthenticator',        
-#         'CLIENT': {
-#             'host': 'mongodb+srv://adso:2669742@cluster0.vhvbcg7.mongodb.net/db_senauthenticator?retryWrites=true&w=majority&appName=Cluster0'
-#         },        
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'db_senauthenticator',        
         'CLIENT': {
-            'host': 'localhost',
-            'port': 27017
+            'host': 'mongodb+srv://adso:2669742@cluster0.vhvbcg7.mongodb.net/db_senauthenticator?retryWrites=true&w=majority&appName=Cluster0'
         },        
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'db_senauthenticator',        
+#         'CLIENT': {
+#             'host': 'localhost',
+#             'port': 27017
+#         },        
+#     }
+# }
 
 
 # Password validation
