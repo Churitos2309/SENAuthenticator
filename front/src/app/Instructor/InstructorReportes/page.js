@@ -78,7 +78,7 @@ export default function Instructor() {
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="fixed top-0 left-0 w-full z-10">
-        <Navbar op1="home" op2="reportes" op3="fichas" />
+        <Navbar op1="home" op2="reportes" />
       </header>
 
       <div className="pt-16 px-4">

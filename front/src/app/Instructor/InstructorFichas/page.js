@@ -7,7 +7,7 @@ export default function page() {
   return (
     <div>
     <header>
-      <Navbar op1="home" op2='reportes' op3='fichas' />
+      <Navbar op1="home" op2='reportes' />
     </header>
     <h1>Hola, por parte de l la interfas de las fichas</h1>
     <div className="flex items-center justify-center">
