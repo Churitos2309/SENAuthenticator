@@ -6,6 +6,8 @@ import Dropdown from "../DropDown/dropdown";
 import Image from "next/image";
 import Link from "next/link";
 
+
+
 import "../media/Style/navbar.css";
 import "../media/Style/navbarVigilante.css";
 
@@ -25,6 +27,7 @@ export default function Navbar({ op1, op2, op3 }) {
           <div className="flex-grow text-center md:text-left md:ml-4">
             <h1 className="text-white font-bold text-xl">SENAuthenticator</h1>
           </div>
+          
           <div className="md:hidden flex">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -44,7 +47,9 @@ export default function Navbar({ op1, op2, op3 }) {
               </svg>
             </button>
           </div>
+
           <div className="hidden md:flex items-center gap-2">
+
             <div className="flex justify-center items-center ÑÑ">
               <Link href="/Administrador/AdministradorHome">
                 <span className="text-white hover:text-gray-200 px-3 py-2 rounded-md text-base font-bold">
@@ -61,6 +66,9 @@ export default function Navbar({ op1, op2, op3 }) {
                   {op3}
                 </span>
               </Link>
+            </div>
+            <div className=" camp text-white ">
+              <ion-icon name="notifications"></ion-icon>
             </div>
             <div className="avatar">
               <div className="w-14 rounded-full">
@@ -92,7 +100,6 @@ export default function Navbar({ op1, op2, op3 }) {
                     Salir
                   </span>
                 </Link>
-                <i className="icon ion-android-exit mr-2"></i>
               </div>
             </Dropdown>
           </div>
