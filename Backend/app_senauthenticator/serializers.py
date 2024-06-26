@@ -4,13 +4,18 @@
 from rest_framework import serializers
 
 # importacion de modelos
-from .models import RegistroFacial, Programa, Ficha, Usuario, Objeto, ContactoEmergencia, Ingreso
+from .models import RegistroFacial, Programa, Ficha, SesionLogin, Usuario, Objeto, ContactoEmergencia, Ingreso
 
 
 # Serializer del Registro Facial
 class RegistroFacialSerializer(serializers.ModelSerializer):
     class Meta: # se utiliza la clase Meta para definir la estructura del serializer
         model = RegistroFacial  # se define el modelo que se va a serializar
+        fields = '__all__'  # se indica que se van a convertir todos los campos a formato json
+        
+class SesionLoginSerializer(serializers.ModelSerializer):
+    class Meta: # se utiliza la clase Meta para definir la estructura del serializer
+        model = SesionLogin # se define el modelo que se va a serializar
         fields = '__all__'  # se indica que se van a convertir todos los campos a formato json
 
 

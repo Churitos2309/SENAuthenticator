@@ -1,4 +1,7 @@
-from djongo import models
+from django.db.models.signals import post_save
+# from djongo import models
+from django.contrib.auth.models import User
+from django.db import models
 
 
 tipo_documento_usuario=[
@@ -34,7 +37,29 @@ genero = [
     ('Masculino', 'Masculino'),
     ('Femenino', 'Femenino'),
 ] 
-    
+  
+class SesionLogin(models.Model):
+    username = models.CharField(max_length=100)
+    email = models.EmailField(null=True, blank=True)
+    password = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.username
+        
+        
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    reset_code = models.CharField(max_length=6, blank=True, null=True)
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+post_save.connect(create_user_profile, sender=User)
+post_save.connect(save_user_profile, sender=User)
 
 class Programa(models.Model):
     nombre_programa=models.CharField(max_length=100, db_column='nombre_programa')

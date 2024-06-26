@@ -19,6 +19,10 @@ urlpatterns = [
     path('contactoEmergencia/<int:pk>/', contacto_emergencia.contacto_emergencia_controlador),
     path('ingreso/', views.IngresoListarCrear.as_view()),
     path('ingreso/<int:pk>/', views.IngresoDetalles.as_view()),
+    path('crear_usuario/', views.RegistroFacialListCreateView.as_view(), name='registro_facial_list_create'),
+    path('crear_usuario/<int:pk>/', views.RegistroFacialRetrieveUpdateDestroyView.as_view(), name='registro_facial_retrieve_update_destroy'),
+    re_path(r'^login/$', views.login_view, name='login'),
+    re_path(r'^forgot-password/$', views.forgot_password_view, name='forgot_password'),
     # re_path('login', views.login()),
     # re_path('register', views.register()),
     # re_path('profile', views.profile())
