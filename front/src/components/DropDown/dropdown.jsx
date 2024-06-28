@@ -9,7 +9,6 @@ export default function Dropdown({ label, children }) {
           className=" icon ion-arrow-down-b text-white text-sm font-medium"
           onClick={() => setIsOpen(!isOpen)}
         >
-            s
           {label}
         </button>
       </div>

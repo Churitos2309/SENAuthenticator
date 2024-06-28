@@ -11,20 +11,20 @@
     border-radius: 50px;
 }
 
-.SalirNav{
+/* .SalirNav{
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+} */
 
-.SalirNav .ruta {
+/* .SalirNav .ruta {
     width: 80%;
-}
+} */
 
-.SalirNav i {
+/* .SalirNav i {
     width: 10%;
-}
+} */
 
 .ÑÑ{
     margin-right: 20rem;

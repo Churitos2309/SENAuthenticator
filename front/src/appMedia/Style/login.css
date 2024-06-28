@@ -5,13 +5,6 @@
     box-sizing: border-box;
 }
 
-/* .fondop{
-    background-image: url('../Img/FondoLogin.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-} */
-
 /* Estilos etiqueta a */
 
 a{
@@ -21,7 +14,7 @@ a{
 /* Estilos contendor padre */
 .bb{
     position: relative;
-    background-image: url('../../../public/assets/FondoLogin.jpg');
+    background-image: url('https://sena.edu.co/es-co/Noticias/newsletter/SENA%20INFORMA%20154/Ed154-SENAINF_02.png.gif');
     background-size: cover;
     height: 100vh;
     width: 100%;
@@ -50,7 +43,7 @@ a{
     justify-content: space-evenly;
     width: 100%;
     align-items: center;
-    padding: 3%;
+    padding: 2%;
     /* margin-top: 4%; */
 }
 
@@ -70,7 +63,7 @@ a{
 .Loogin{
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: center;
     background-color: white;
     padding: 7%;
@@ -94,7 +87,7 @@ a{
 .formulario{
     display: flex;
     flex-direction: column;
-    gap: 2.8rem;
+    gap: 2.7rem;
     align-items: center;
     width: 90%;
 }
@@ -108,11 +101,10 @@ a{
     gap: 1rem;
     width: 90%;
     align-items: center;
-    border: none;
-    border-bottom: 1px solid black;
+
 }
 .IP ion-icon{
-    min-width: 15px;
+    min-width: 20px;
     font-size: 22px;
 }
 .TD{
@@ -120,7 +112,6 @@ a{
     gap: 1rem;
     width: 100%;
     align-items: center;
-    border-bottom: 1px solid black;
 }
 .TD ion-icon{
     min-width: 25px;
@@ -128,16 +119,14 @@ a{
 }
 .IP input{
     border-radius: 10px;
-    border-style: none;
     padding: 10px;
     outline: 0px;
 }
+
 input::placeholder{
     color: rgb(66, 65, 65);
 }
-input:hover{
-    border: none;
-}
+
 .BB{
     padding: 8px;
     background-color:  #04a404;
@@ -146,26 +135,19 @@ input:hover{
     cursor: pointer;
     color: white;
 }
-/* button:hover{
-    background-color:  white;
-    color: #04a404;
-    border: solid 1px;
-} */
 
 /* Estilos Select */
 
 select {
     /* background-color: #f2f2f2; */
     outline: 0px;
-    border-style: none;
     color: #333;
-    font-size: 13px;
-    border: 1px solid #ccc;
+    /* font-size: 13px; */
     /* border-radius: 30px; */
     padding: 8px;
-    width: 210px;
-    height: 40px;
-    border: none;
+    width: 275px;
+    height: 47px;
+    border-radius: 10px;
 }
 select:hover {
     cursor: pointer;
@@ -213,3 +195,215 @@ select option:hover {
     /* height: 30vh; */
 }
 
+
+/* Medias Query */
+@media (min-width: 300px) and (max-width: 400px) {
+    .Escudo{
+        width: 0%;
+    }
+    .Logo{
+        width: 0%;
+    }
+    .Login{
+        width: 100%;
+        margin-top: 7%;
+    }
+    .Loogin{
+        margin-right: 8%;
+        margin-top: 14%;
+    }
+    .TD{
+        width: 100%;
+        margin-right: 8%;
+    }
+    .IP{
+        width: 100%;
+        margin-right: 7%;
+    }
+    .IP input{
+        width: 99%;
+    }
+     .formulario{
+        width: 100%;
+     }
+     form{
+        width: 100%;
+     }
+}
+
+@media (min-width: 400px) and (max-width: 430px) {
+    .Escudo{
+        width: 0%;
+    }
+    .Logo{
+        width: 0%;
+    }
+    .Login{
+        width: 100%;
+        margin-top: 2%;
+    }
+    .Loogin{
+        margin-right: 3%;
+        margin-top: 10%;
+    }
+}
+
+@media (min-width: 431px) and (max-width: 510px) {
+    .Escudo{
+        width: 0%;
+    }
+    .Logo{
+        width: 0%;
+    }
+    .Login{
+        width: 90%;
+        margin-top: 9%;
+        height: 0%;
+    }
+    .Loogin{
+        margin-right: 2%;
+        height: 0%;
+    }
+}
+@media (min-width: 510px) and (max-width: 550px) {
+    .Escudo{
+        width: 0%;
+    }
+    .Logo{
+        width: 0%;
+    }
+    .Login{
+        width: 85%;
+        margin-top: 8%;
+        height: 0%;
+    }
+    .Loogin{
+        margin-right: 2%;
+        height: 0%;
+    }
+}
+@media (min-width: 550px) and (max-width: 610px) {
+    .Escudo{
+        width: 0%;
+    }
+    .Logo{
+        width: 0%;
+    }
+    .Login{
+        width: 80%;
+        margin-top: 7%;
+        height: 0%;
+    }
+    .Loogin{
+        margin-right: 2%;
+        height: 0%;
+    }
+}
+@media (min-width: 610px) and (max-width: 710px) {
+    .Escudo{
+        width: 0%;
+    }
+    .Logo{
+        width: 0%;
+    }
+    .Login{
+        width: 70%;
+        margin-top: 5%;
+        height: 0%;
+    }
+    .Loogin{
+        margin-right: 2%;
+        height: 0%;
+    }
+}
+
+@media (min-width: 710px) and (max-width: 810px) {
+    .Escudo{
+        width: 0%;
+    }
+    .Logo{
+        width: 0%;
+    }
+    .Login{
+        width: 60%;
+        margin-top: 3%;
+        height: 0%;
+    }
+    .Loogin{
+        margin-right: 2%;
+        height: 0%;
+    }
+}
+
+@media (min-width: 810px) and (max-width: 910px) {
+    .Login{
+        width: 80%;
+        margin-top: 2%;
+        height: 0%;
+    }
+    .Loogin{
+        margin-right: 2%;
+        height: 0%;
+    }
+}
+
+
+
+@media (min-width: 910px) and (max-width: 1010px) {
+    .Login{
+        width: 60%;
+        margin-top: 1%;
+        height: 0%;
+    }
+    .Loogin{
+        margin-right: 2%;
+        height: 0%;
+    }
+}
+
+@media (min-width: 1010px) and (max-width: 1110px) {
+    .Login{
+        width: 50%;
+        margin-top: 0%;
+        height: 0%;
+    }
+    .Loogin{
+        margin-right: 2%;
+        height: 0%;
+    }
+}
+
+@media (min-width: 1110px) and (max-width: 1210px) {
+    .Login{
+        width: 45%;
+        margin-top: 0%;
+        height: 0%;
+    }
+    .Loogin{
+        margin-right: 2%;
+        height: 0%;
+    }
+}
+
+@media (min-width: 1210px) and (max-width: 1310px) {
+    .Login{
+        width: 40%;
+        margin-top: 0%;
+        height: 0%;
+    }
+    .Loogin{
+        margin-right: 2%;
+        height: 0%;
+    }
+}
+@media (min-width: 1310px) and (max-width: 1410px) {
+    .Login{
+        width: 35%;
+        margin-top: 0%;
+        height: 0%;
+    }
+    .Loogin{
+        margin-right: 2%;
+        height: 0%;
+    }
+} 

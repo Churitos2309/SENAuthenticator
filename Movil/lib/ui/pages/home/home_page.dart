@@ -68,10 +68,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       // Barra de la aplicación (AppBar) con iconos de acción.
       appBar: AppBar(
-        title: Image.asset(
-          "images/insta_title.png",
-          height: 50,
-        ),
+        title: const Image(image: AssetImage('images/login/LogoReconocimientoFacialBlanco.png')),
         actions: [
           IconButton(
             icon: const Icon(Icons.add_circle_outline),
