@@ -51,9 +51,15 @@ def usuario_controlador(request, pk=None): # La función contiene dos parámetro
         # Solicitud para obtener todos los objetos en una lista
         if request.method == 'GET':
             try:
+<<<<<<< HEAD
+                usuarios = Usuario.objects.all()
+                serializer = UsuarioSerializer(usuarios, many=True)
+                return Response(serializer.data)
+=======
                 usuarios = Usuario.objects.all() # Se intenta obtener todos los objetos
                 serializer = UsuarioSerializer(usuarios, many=True) # Se serializan los objetos, la opción many=True indica que se están serializando múltiples objetos
                 return Response(serializer.data) # Se devuelve una respuesta con los objetos serializados
+>>>>>>> ebb300cc574f2bd06e7f6707dcf5acc30c95fe02
             except Exception as e:
                 return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)                
 

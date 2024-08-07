@@ -87,7 +87,16 @@ DATABASES = {
         'CLIENT': {
             'host': 'mongodb+srv://adso:2669742@cluster0.vhvbcg7.mongodb.net/db_senauthenticator?retryWrites=true&w=majority&appName=Cluster0'
         },        
-    }
+    },
+    
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'mesaservicioctpi',
+    #     'USER': 'root',
+    #     'PASSWORD': '',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # },
 }
 
 
