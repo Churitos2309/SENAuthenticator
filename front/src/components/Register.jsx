@@ -88,7 +88,7 @@ const Register = () => {
       style={{
         backgroundImage:
           "url('https://cloudfront-us-east-1.images.arcpublishing.com/semana/NRFYARCDZRFGJNJTN7X7LE4GCU.jpg')",
-        backgroundSize: "cover",
+       
         backgroundPosition: "center",
       }}
     >

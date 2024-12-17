@@ -1,12 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./index.css";
 import Login from "./components/Login.jsx";
-import InicioIntructor from "./pages/Instructor/inicioIntructor";
+
 import RutasProtegidas from "./auth/authRoutes.jsx";
 import AuthProvider from "./auth/authProvider.jsx";
 import Register from "./components/Register.jsx";
+
+import "./index.css";
+import InicioIntructor from "./pages/Instructor/inicioIntructor.jsx";
+import ReportesInstructor from "./pages/Instructor/reportesInstructor.jsx";
+import Admin from "./pages/Instructor/admin.jsx";
+
 
 const router = createBrowserRouter([
   // Ruta Principal
@@ -23,6 +28,19 @@ const router = createBrowserRouter([
       {
         path: "/inicioInstructor",
         element: <InicioIntructor></InicioIntructor>,
+
+
+      },
+      {
+        path: "/ReportesInstructor",
+        element: <ReportesInstructor></ReportesInstructor>,
+
+      },
+      {
+        path: "/inicioAdministrador",
+        element: <Admin></Admin>,
+
+
       },
       
     ],
